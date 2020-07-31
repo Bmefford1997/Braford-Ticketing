@@ -1,26 +1,33 @@
 ﻿@model Braford_Identity.Models.Ticket
+@using Microsoft.AspNetCore.Identity
+@using Braford_Identity.Areas.Identity.Data
+
+
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h1>Create</h1>
 
 <h4>Ticket</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="user" class="control-label"></label>
-                <input asp-for="user" class="form-control" />
+                <input asp-for="user" class="form-control" value="@UserManager.GetUserName(User)" readonly />
                 <span asp-validation-for="user" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="time" class="control-label"></label>
-                <input asp-for="time" class="form-control" />
+                <input asp-for="time" class="form-control" type="datetime-local" value="@DateTime.Now" readonly />
                 <span asp-validation-for="time" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,13 +41,13 @@
                 <span asp-validation-for="area_of_issue" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="resolution" class="control-label"></label>
-                <input asp-for="resolution" class="form-control" />
+                <label asp-for="resolution" class="control-label" hidden></label>
+                <input asp-for="resolution" class="form-control" hidden />
                 <span asp-validation-for="resolution" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" />
+                <label asp-for="status" class="control-label" hidden></label>
+                <input asp-for="status" class="form-control" readonly hidden value="In Queue" />
                 <span asp-validation-for="status" class="text-danger"></span>
             </div>
             <div class="form-group">
