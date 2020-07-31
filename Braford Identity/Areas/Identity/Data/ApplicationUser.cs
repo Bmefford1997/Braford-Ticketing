@@ -11,7 +11,7 @@ namespace Braford_Identity.Areas.Identity.Data
     public class ApplicationUser : IdentityUser
     {
         [PersonalData]
-        [Column(TypeName= "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string User { get; set; }
     }
 }
