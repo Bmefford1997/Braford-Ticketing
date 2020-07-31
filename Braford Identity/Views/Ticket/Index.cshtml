@@ -25,9 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.area_of_issue)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.resolution)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.status)
             </th>
@@ -49,13 +49,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.area_of_issue)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.resolution)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.status)
             </td>
+
             <td>
+                @*<a>@item.user</a>*@
+                
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
