@@ -1,4 +1,9 @@
 ﻿@model IEnumerable<Braford_Identity.Models.Ticket>
+@using Microsoft.AspNetCore.Identity
+@using Braford_Identity.Areas.Identity.Data
+
+
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -19,15 +24,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.time)
             </th>
-            <th>
+            <th class="col-4">
                 @Html.DisplayNameFor(model => model.issue)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.area_of_issue)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.resolution)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.resolution)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.status)
             </th>
@@ -35,35 +40,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.user)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.issue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.area_of_issue)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.resolution)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.time)
+                </td>
+                <td class="col-4">
+                    @Html.DisplayFor(modelItem => item.issue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.area_of_issue)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.resolution)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
 
-            <td>
-                @*<a>@item.user</a>*@
-                
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                <td class="text-center">
+                @** check if user matches a ticket in queue to be able to modify or delete *@
+                    @if (@UserManager.GetUserName(User) == @item.user)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <a>|</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> <a>|</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
